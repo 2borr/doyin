@@ -8,3 +8,5 @@ pipeline {
                 echo 'i love nora odusola ewaoluwa'
             }
         }
+  }
+}
