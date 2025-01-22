@@ -5,6 +5,6 @@ pipeline {
             steps {
                 echo 'Building the application...'
                 echo 'i love nora'
-                echo 'i love nora odusola'
+                echo 'i love nora odusola ewaoluwa'
             }
         }
