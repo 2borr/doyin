@@ -1,14 +1,26 @@
 pipeline {
-    agent any  // Runs on any available agent
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building the application...'
-                echo 'i love nora'
-                echo 'i love nora odusola ewaoluwa'
-                echo 'i love her so much'
-                echo 'cant wait'
-            }
+  agent any
+  stages {
+    stage('Checkout') {
+      steps {
+        sh 'echo passed'
+        //git branch: 'main', url: 'https://github.com/iam-veeramalla/Jenkins-Zero-To-Hero.git'
+      }
+    }
+    stage('Build and Test') {
+      steps {
+        sh 'ls -ltr'
+        // build the project and create a JAR file
+         mvn clean package'
+      }
+    }
+    stage('Static Code Analysis') {
+      environment {
+        SONAR_URL = "http://192.168.56.1:9015/"
+      }
+      steps {
+        withCredentials([string(credentialsId: 'sonar', variable: 'SONAR_AUTH_TOKEN')]) {
+          mvn sonar:sonar -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
         }
-  }
-}
+      }
+    }
