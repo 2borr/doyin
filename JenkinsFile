@@ -1,5 +1,10 @@
 pipeline {
-  agent any
+ agent {
+        docker {
+            image 'maven:3.8.5-openjdk-11'  // Use a Maven Docker image
+ }
+    }
+
   stages {
     stage('Checkout') {
       steps {
